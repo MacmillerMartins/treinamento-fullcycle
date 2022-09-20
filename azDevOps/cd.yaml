@@ -1,0 +1,26 @@
+resources:
+  repositories:
+  - repository: treinamento-fullcycle
+    type: github
+    endpoint: 'sc-github'
+    name: MacmillerMartins/treinamento-fullcycle
+
+trigger:
+ - main
+
+stages:
+- stage: CD
+  displayName: CD
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'sc-dockerhub'
+        repository: 'macmiller/argocd-fullcycle'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: '$(Build.BuildId)'
