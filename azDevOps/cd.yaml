@@ -3,7 +3,7 @@ resources:
   - repository: treinamento-fullcycle
     type: github
     endpoint: 'sc-github'
-    name: treinamento-fullcycle
+    name: MacmillerMartins/treinamento-fullcycle
 
 trigger:
  - main
