@@ -50,6 +50,7 @@ stages:
       displayName: Commit and push
       inputs:
         script: |
+          git branch
           git config --local user.email "macmiller_ferreira@hotmail.com"
           git config --local user.name "MacmillerMartins"
           git add .
