@@ -73,10 +73,12 @@ stages:
       displayName: Git Add and Commit
       inputs:
         script: |
+          git add .
           git commit -m "change image tag"
 
     - task: CmdLine@2
       displayName: Git Push
       inputs:
         script: |
+          git pull origin main
           git push --set-upstream origin main
