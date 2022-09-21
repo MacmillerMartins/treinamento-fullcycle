@@ -67,7 +67,7 @@ stages:
       displayName: Git Checkout
       inputs:
         script: |
-          git checkout -b main
+          git checkout -b $(Build.SourceBranchName)
 
     - task: CmdLine@2
       displayName: Git Add and Commit
@@ -80,4 +80,4 @@ stages:
       displayName: Git Push
       inputs:
         script: |
-          git push --set-upstream origin main
+          git push --set-upstream origin $(Build.SourceBranchName)
