@@ -13,7 +13,6 @@ stages:
   displayName: CD
   jobs:
   - job: Deploy
-    dependsOn: Build
     displayName: Deploy
     pool:
       vmImage: 'ubuntu-latest'
