@@ -73,6 +73,7 @@ stages:
       displayName: Git Add and Commit
       inputs:
         script: |
+          git add .
           git commit -m "change image tag"
 
     - task: CmdLine@2
