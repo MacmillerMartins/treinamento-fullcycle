@@ -11,18 +11,25 @@ trigger:
 stages:
 - stage: CD
   displayName: CD
+
   jobs:
   - job: Deploy
     displayName: Deploy
     pool:
       vmImage: 'ubuntu-latest'
+
     steps:
+
+    - checkout: self
+      persistCredentials: true
+
     - task: KubernetesManifest@0
       displayName: Kustomize
       inputs:
         action: 'bake'
         renderType: 'kustomize'
         kustomizationPath: 'k8s'
+
     - task: CmdLine@2
       displayName: Update k8s
       inputs:
@@ -30,18 +37,19 @@ stages:
           cd k8s
           kustomize edit set image goapp=macmiller/argocd-fullcycle:$(Build.BuildId)
           cat kustomization.yaml
+
     - task: CmdLine@2
       displayName: Git Commit
       inputs:
         script: |
           git config --local user.email "macmiller_ferreira@hotmail.com"
           git config --local user.name "MacmillerMartins"
-          git remote set-url origin "git@github.com:MacmillerMartins/treinamento-fullcycle.git"
+#         git remote set-url origin "git@github.com:MacmillerMartins/treinamento-fullcycle.git"
+
     - task: CmdLine@2
       displayName: Git Push
       inputs:
         script: |
-          ls -la ~/.ssh/
           git checkout -b main
           git add -A
           git commit -m "change image tag"
