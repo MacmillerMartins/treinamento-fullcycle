@@ -55,4 +55,4 @@ stages:
           git config --local user.name "MacmillerMartins"
           git add .
           git commit -m "change image tag"
-          git push origin main
+          git push origin $(Build.SourceBranchName)
