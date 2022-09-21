@@ -80,4 +80,5 @@ stages:
       displayName: Git Push
       inputs:
         script: |
+          git pull
           git push --set-upstream origin main
