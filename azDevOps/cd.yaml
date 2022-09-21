@@ -36,7 +36,7 @@ stages:
         script: |
           git config --local user.email "macmiller_ferreira@hotmail.com"
           git config --local user.name "MacmillerMartins"
-          git config --local 'remote "origin"'.url "git@github.com:MacmillerMartins/treinamento-fullcycle.git"
+          git remote add origin "git@github.com:MacmillerMartins/treinamento-fullcycle.git"
     - task: CmdLine@2
       displayName: Git Push
       inputs:
