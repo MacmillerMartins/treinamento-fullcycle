@@ -9,4 +9,4 @@ namespace: goapp
 images:
 - name: goapp
   newName: macmiller/argocd-fullcycle
-  newTag: "244"
+  newTag: "245"
