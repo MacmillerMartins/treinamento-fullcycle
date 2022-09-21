@@ -79,11 +79,4 @@ stages:
       displayName: Git Push
       inputs:
         script: |
-<<<<<<< HEAD
           git push --set-upstream origin main
-=======
-          git checkout -b prd
-          git add -A
-          git commit -m "change image tag"
-          git push --set-upstream origin main
->>>>>>> 165b8ba (change image tag)
