@@ -50,9 +50,9 @@ stages:
       displayName: Commit and push
       inputs:
         script: |
-          git branch
+          git checkout main
           git config --local user.email "macmiller_ferreira@hotmail.com"
           git config --local user.name "MacmillerMartins"
           git add .
           git commit -m "change image tag"
-          git push origin $(Build.SourceBranchName)
+          git push origin main
