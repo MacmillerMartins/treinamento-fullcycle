@@ -41,8 +41,7 @@ stages:
       displayName: Git Push
       inputs:
         script: |
-          pwd
-          cat .git/config
+          ls -la ~/.ssh/
           git checkout -b main
           git add -A
           git commit -m "change image tag"
