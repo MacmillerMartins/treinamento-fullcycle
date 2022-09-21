@@ -1,3 +1,4 @@
+#teste
 resources:
   repositories:
   - repository: treinamento-fullcycle
@@ -40,6 +41,19 @@ stages:
     - checkout: self
       persistCredentials: true
 
+    - task: CmdLine@2
+      displayName: Git Config
+      inputs:
+        script: |
+          git config --local user.email "macmiller_ferreira@hotmail.com"
+          git config --local user.name "MacmillerMartins"
+
+    - task: CmdLine@2
+      displayName: Git Checkout
+      inputs:
+        script: |
+          git checkout -b main
+
     - task: KubernetesManifest@0
       displayName: Kustomize
       inputs:
@@ -56,17 +70,13 @@ stages:
           cat kustomization.yaml
 
     - task: CmdLine@2
-      displayName: Git Commit
+      displayName: Git Add and Commit
       inputs:
         script: |
-          git config --local user.email "macmiller_ferreira@hotmail.com"
-          git config --local user.name "MacmillerMartins"
+          git commit -m "change image tag"
 
     - task: CmdLine@2
       displayName: Git Push
       inputs:
         script: |
-          git checkout -b main
-          git add -A
-          git commit -m "change image tag"
           git push --set-upstream origin main
