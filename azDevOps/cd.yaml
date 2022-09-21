@@ -41,19 +41,6 @@ stages:
     - checkout: self
       persistCredentials: true
 
-    - task: CmdLine@2
-      displayName: Git Config
-      inputs:
-        script: |
-          git config --local user.email "macmiller_ferreira@hotmail.com"
-          git config --local user.name "MacmillerMartins"
-
-    - task: CmdLine@2
-      displayName: Git Checkout
-      inputs:
-        script: |
-          git checkout -b main
-
     - task: KubernetesManifest@0
       displayName: Kustomize
       inputs:
@@ -68,6 +55,19 @@ stages:
           cd k8s
           kustomize edit set image goapp=macmiller/argocd-fullcycle:$(Build.BuildId)
           cat kustomization.yaml
+
+    - task: CmdLine@2
+      displayName: Git Config
+      inputs:
+        script: |
+          git config --local user.email "macmiller_ferreira@hotmail.com"
+          git config --local user.name "MacmillerMartins"
+
+    - task: CmdLine@2
+      displayName: Git Checkout
+      inputs:
+        script: |
+          git checkout -b main
 
     - task: CmdLine@2
       displayName: Git Add and Commit
