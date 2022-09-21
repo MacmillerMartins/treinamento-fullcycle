@@ -13,6 +13,23 @@ stages:
   displayName: CD
 
   jobs:
+
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'sc-dockerhub'
+        repository: 'macmiller/argocd-fullcycle'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: |
+          $(Build.BuildId)
+          latest
+
+
   - job: Deploy
     displayName: Deploy
     pool:
@@ -44,7 +61,6 @@ stages:
         script: |
           git config --local user.email "macmiller_ferreira@hotmail.com"
           git config --local user.name "MacmillerMartins"
-#         git remote set-url origin "git@github.com:MacmillerMartins/treinamento-fullcycle.git"
 
     - task: CmdLine@2
       displayName: Git Push
