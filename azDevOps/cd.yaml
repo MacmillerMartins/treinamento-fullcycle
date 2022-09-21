@@ -12,21 +12,6 @@ stages:
 - stage: CD
   displayName: CD
   jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'sc-dockerhub'
-        repository: 'macmiller/argocd-fullcycle'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
-        tags: |
-          $(Build.BuildId)
-          latest
-
   - job: Deploy
     dependsOn: Build
     displayName: Deploy
@@ -56,7 +41,9 @@ stages:
       displayName: Git Push
       inputs:
         script: |
+          pwd
+          cat .git/config
           git checkout -b main
           git add -A
-          git commit -m "dhange image tag"
+          git commit -m "change image tag"
           git push --set-upstream origin main
