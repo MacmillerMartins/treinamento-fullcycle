@@ -47,14 +47,11 @@ stages:
           kustomize edit set image goapp=macmiller/argocd-fullcycle:$(Build.BuildId)
           cat kustomization.yaml
     - task: CmdLine@2
-      displayName: Commit
+      displayName: Commit and push
       inputs:
         script: |
           git config --local user.email "macmiller_ferreira@hotmail.com"
           git config --local user.name "MacmillerMartins"
-          git commit -am "change image tag"
-    - task: CmdLine@2
-      displayName: Push
-      inputs:
-        script: |
+          git add .
+          git commit -m "change image tag"
           git push origin main
