@@ -29,7 +29,6 @@ stages:
           $(Build.BuildId)
           latest
 
-
   - job: Deploy
     displayName: Deploy
     pool:
